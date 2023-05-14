@@ -12,8 +12,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  var btnC = false;
   Timer? timer;
+
+  void splashScreenChange() {
+    timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      Get.off(() => const HomeView());
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    splashScreenChange();
+  }
 
   @override
   void dispose() {
@@ -23,16 +34,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Spacer(),
+            Spacer(),
             // App logo
-            const Center(
+            Center(
               child: Text(
                 "xrepo.",
                 style: TextStyle(
@@ -43,9 +54,9 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
 
-            const Spacer(),
+            Spacer(),
             // Welcome text
-            const Center(
+            Center(
               child: Text(
                 welcometext,
                 style: TextStyle(
@@ -56,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             // Slogan text
-            const Center(
+            Center(
               child: Text(
                 slogan,
                 style: TextStyle(
@@ -67,46 +78,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 25),
+            SizedBox(height: 25),
 
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: () {
-                  setState(() {
-                    btnC = true;
-                  });
-
-                  timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-                    setState(() {
-                      btnC = false;
-                    });
-
-                    Get.off(() => const HomeView());
-                  });
-                },
-                child: btnC
-                    ? const SizedBox(
-                        height: 25,
-                        width: 25,
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.black,
-                            strokeWidth: 2,
-                          ),
-                        ),
-                      )
-                    : const Text(
-                        "Continue",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-              ),
-            ),
-
-            const SizedBox(height: 80),
+            SizedBox(height: 80),
           ],
         ),
       ),
