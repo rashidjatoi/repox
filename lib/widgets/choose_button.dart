@@ -5,8 +5,10 @@ class ChooseButton extends StatelessWidget {
   final String btnTitle;
   final Color btnTextColor;
   final VoidCallback ontap;
+  final double height;
   const ChooseButton({
     super.key,
+    this.height = 36.0,
     required this.ontap,
     required this.btnColor,
     required this.btnTitle,
@@ -16,7 +18,7 @@ class ChooseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 120,
+      height: height,
       child: OutlinedButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(btnColor),
